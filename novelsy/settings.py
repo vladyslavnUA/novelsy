@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'project',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +115,15 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# books app settings
+PROJECT_BOOK_TITLE_MAX_LENGTH = 600
+
+# Where to redirect during authentication
+# LOGIN_REDIRECT_URL = reverse_lazy('book-list-project')
+# LOGOUT_REDIRECT_URL = "/
