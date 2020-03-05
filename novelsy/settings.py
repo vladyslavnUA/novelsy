@@ -25,7 +25,11 @@ SECRET_KEY = '(qcpc5zrvtj832t@@@x@7sl38st0a2$owhrcso-ipgei9*mq^h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'novelsy'
+]
 
 
 # Application definition
@@ -37,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'project',
     'payments.apps.PaymentsConfig',
     'accounts',
+    'project',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +61,9 @@ ROOT_URLCONF = 'novelsy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,17 +78,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'novelsy.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
+        'NAME': 'novelsy',
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -116,6 +120,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = 'project:home_page'
+LOGOUT_REDIRECT_URL = 'project:home_page'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -125,6 +131,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # books app settings
 PROJECT_BOOK_TITLE_MAX_LENGTH = 600
+PROJECT_BOOK_AUTHOR_MAX_LENGTH = 600
 
 # Where to redirect during authentication
 # LOGIN_REDIRECT_URL = reverse_lazy('book-list-project')
