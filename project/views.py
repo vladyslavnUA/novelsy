@@ -21,3 +21,14 @@ class BookListView(generic.ListView):
         return render(request, 'list.html', {
           'books': books
         })
+
+class BookDetailView(generic.DetailView):
+    """ Renders a specific project based on it's slug."""
+    model = Book
+
+    def get(self, request, slug):
+        """ Returns a specific projects project by slug. """
+        book = self.get_queryset().get(slug__iexact=slug)
+        return render(request, 'book.html', {
+          'book': book
+        })
