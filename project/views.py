@@ -32,3 +32,13 @@ class BookDetailView(generic.DetailView):
         return render(request, 'book.html', {
           'book': book
         })
+class BookCreateView(generic.CreateView):
+    form_class = BookForm
+    template_name = "new_book.html"
+
+    def post(self, request, *args, **kwargs):
+        form = BookForm(request.POST)
+        if form.is_valid():
+            project = form.save()
+            project.save()
+            return HttpResponseRedirect(reverse_lazy("book-details-project", args=[project.slug]))
