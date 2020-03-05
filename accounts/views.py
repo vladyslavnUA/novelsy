@@ -3,6 +3,8 @@ from accounts.forms import UserCreationForm
 from accounts.forms import SignUpForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from .models import UserProfile
+from .forms import UserProfileForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.detail import (DetailView)
