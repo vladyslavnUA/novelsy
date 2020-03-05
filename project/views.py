@@ -42,3 +42,13 @@ class BookCreateView(generic.CreateView):
             project = form.save()
             project.save()
             return HttpResponseRedirect(reverse_lazy("book-details-project", args=[project.slug]))
+
+class BookUpdateView(generic.UpdateView):
+    model = Book
+    fields = ['title','content']
+    template_name = 'new_book.html'
+
+class BookDeleteView(generic.DeleteView):
+    model = Book
+    success_url = reverse_lazy('book-list-project')
+    template_name = 'confirm_delete.html'
