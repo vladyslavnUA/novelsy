@@ -130,8 +130,8 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # books app settings
-PROJECT_BOOK_TITLE_MAX_LENGTH = 600
-PROJECT_BOOK_AUTHOR_MAX_LENGTH = 600
+PROJECT_BOOK_TITLE_MAX_LENGTH = 250
+PROJECT_BOOK_AUTHOR_MAX_LENGTH = 250
 
 # Where to redirect during authentication
 # LOGIN_REDIRECT_URL = reverse_lazy('book-list-project')
