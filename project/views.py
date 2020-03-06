@@ -4,16 +4,17 @@ from django.urls import reverse_lazy
 from project.forms import BookForm
 from project.models import Book
 from django.http import HttpResponse, HttpResponseRedirect
+import project
 
 
-
-# class Home(generic.CreateView):
 def home(request):
     return render(request, 'base.html')
 
 class BookListView(generic.ListView):
     """ Renders a list of all projects. """
     model = Book
+    template_name = ''
+    queryset = Book.objects.all()
 
     def get(self, request):
         """ GET a list of projects. """
@@ -32,6 +33,7 @@ class BookDetailView(generic.DetailView):
         return render(request, 'book.html', {
           'book': book
         })
+
 class BookCreateView(generic.CreateView):
     form_class = BookForm
     template_name = "new_book.html"
@@ -47,6 +49,7 @@ class BookUpdateView(generic.UpdateView):
     model = Book
     fields = ['title','content']
     template_name = 'new_book.html'
+
 
 class BookDeleteView(generic.DeleteView):
     model = Book
