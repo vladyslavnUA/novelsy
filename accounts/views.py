@@ -3,15 +3,15 @@ from accounts.forms import UserCreationForm
 from accounts.forms import SignUpForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from .models import UserProfile
-from .forms import UserProfileForm
+# from .models import UserProfile
+# from .forms import UserProfileForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.detail import (DetailView)
 from django.contrib.auth.models import User
 from django.views.generic.edit import (
     CreateView,
-    UserProfile
+    # UserProfile
 )
 
 
@@ -21,7 +21,7 @@ class SignUpView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('accounts:login')
     template_name = 'registration/signup.html'
     success_message = (
-        '''congradulations! you are now a registered user.'''
+        '''congratulations! you are now a registered user.'''
     )
     
     def form_valid(self, form):
@@ -29,35 +29,35 @@ class SignUpView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class UserProfile(UserPassesTestMixin, DetailView):
-    model = User
-    template_name = 'accounts/profile/show_profile.html'
+# class UserProfile(UserPassesTestMixin, DetailView):
+#     model = User
+#     template_name = 'accounts/profile/show_profile.html'
 
-    def get_queryset(self):
-        '''Returns a queryset of all User objects.'''
-        return self.model.objects.all()
+#     def get_queryset(self):
+#         '''Returns a queryset of all User objects.'''
+#         return self.model.objects.all()
 
-    def get(self, request, pk):
-        """Renders a page to show an account of user.
-           Parameters:
-           pk(int): specific id of the User in db.
-           request(HttpRequest): the HTTP request sent to the server
+#     def get(self, request, pk):
+#         """Renders a page to show an account of user.
+#            Parameters:
+#            pk(int): specific id of the User in db.
+#            request(HttpRequest): the HTTP request sent to the server
 
-           Returns:
-           render: HttpResponse
+#            Returns:
+#            render: HttpResponse
 
-         """
-        user = self.get_queryset().get(id=pk)
-        context = {
-            'user': user,
-        }
-        return render(request, self.template_name, context)
+#          """
+#         user = self.get_queryset().get(id=pk)
+#         context = {
+#             'user': user,
+#         }
+#         return render(request, self.template_name, context)
 
-    def test_func(self):
-        '''Ensures the user can see only their own profile.'''
-        requested_user = self.get_object()
-        user = self.request.user
-        return requested_user == user
+#     def test_func(self):
+#         '''Ensures the user can see only their own profile.'''
+#         requested_user = self.get_object()
+#         user = self.request.user
+#         return requested_user == user
 
 
 # class ProfileUpdate(UserPassesTestMixin, UpdateView):
