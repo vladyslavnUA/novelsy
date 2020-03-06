@@ -6,4 +6,4 @@ class BookForm(forms.ModelForm):
      class Meta:
     # """ Render and process a form based on the Book model. """
         model = Book
-        fields = ("title", "content", "author")
+        fields = ("title", "author", "description", "image", "price")
