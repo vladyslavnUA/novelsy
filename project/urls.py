@@ -1,11 +1,11 @@
 
 from django.urls import path, include
-from project.views import home, BookListView, BookDetailView, BookCreateView, BookUpdateView, BookDeleteView
+from project.views import Home, BookListView, BookDetailView, BookCreateView, BookUpdateView, BookDeleteView
 
-app_name = 'project'
+# app_name = 'project'
 
 urlpatterns = [
-    path('', home, name='home_page'),
+    path('', Home.as_view(), name='home_page'),
     path('list_of_books/', BookListView.as_view(), name='book-list-project'),
     path('new_book/', BookCreateView.as_view(), name='book-create-project'),
     path('<str:slug>/', BookDetailView.as_view(), name='book-details-project'),
