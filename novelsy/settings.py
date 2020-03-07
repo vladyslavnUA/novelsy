@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,6 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = os.environ['DJANGO_KEY']
 SECRET_KEY = '(qcpc5zrvtj832t@@@x@7sl38st0a2$owhrcso-ipgei9*mq^h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'payments.apps.PaymentsConfig',
     'accounts',
     'project',
+    
 ]
 
 MIDDLEWARE = [
@@ -62,7 +65,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates')
+            os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -83,8 +86,9 @@ WSGI_APPLICATION = 'novelsy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'novelsy',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
     }
 }
 
@@ -112,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
@@ -120,19 +124,28 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL = 'project:home_page'
-LOGOUT_REDIRECT_URL = 'project:home_page'
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+
+LOGIN_REDIRECT_URL = reverse_lazy('book-list-project')
+LOGOUT_REDIRECT_URL = "/"
+
+
 # books app settings
 PROJECT_BOOK_TITLE_MAX_LENGTH = 250
 PROJECT_BOOK_AUTHOR_MAX_LENGTH = 250
 
+
+# stripe
+STRIPE_SECRET_KEY = 'pk_test_kOHdU7HqPTbUayzr7rZFDveZ00I7lZ56Gi'
+STRIPE_PUBLISHABLE_KEY = 'sk_test_1j7l2L4eHYAxn3kSkbBdXRGE00lhNp5k3g'
 # Where to redirect during authentication
-# LOGIN_REDIRECT_URL = reverse_lazy('book-list-project')
-# LOGOUT_REDIRECT_URL = "/
+
+try:
+    from buycode.local_settings import *
+except ImportError:
+    pass
