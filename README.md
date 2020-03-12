@@ -1,4 +1,4 @@
-![GitHub Logo](/static/logo.png)
+![novelsy](/static/f5cbe498-3d4b-413e-870d-75193148997f_200x200.png)
 ## About
 
 Welcome to [**novelsy-books**](https://novelsybook.herokuapp.com/), your book store for any time of the day.
