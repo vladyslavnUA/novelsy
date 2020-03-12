@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from project.forms import BookForm
 from project.models import Book
 from django.http import HttpResponse, HttpResponseRedirect
+
+
 
 class Home(generic.CreateView):
     def get(self, request):
@@ -30,7 +32,6 @@ class BookDetailView(generic.DetailView):
         return render(request, 'book.html', {
           'book': book
         })
-
 class BookCreateView(generic.CreateView):
     form_class = BookForm
     template_name = "new_book.html"
@@ -46,7 +47,6 @@ class BookUpdateView(generic.UpdateView):
     model = Book
     fields = ['title','content']
     template_name = 'new_book.html'
-
 
 class BookDeleteView(generic.DeleteView):
     model = Book
