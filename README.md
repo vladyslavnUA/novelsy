@@ -20,7 +20,7 @@ In order to get this site on your localhost, ```clone or download``` this reposi
 Open your terminal, ```cd``` to the folder containing ```manage.py``` and type ```python3 manage.py runserver```.
 
 ## How to Use
-Add a book to the site by clicking ```List a Pool```, view current book listings by navigating to the home page, or buy a book
+Add a book to the site by clicking ```List a Book```, view current book listings by navigating to the home page, or buy a book
 when you are ready.
 
 ## Contribute
