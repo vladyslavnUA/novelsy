@@ -1,7 +1,7 @@
 ![GitHub Logo](/static/logo.png)
 ## About
 
-Welcome to [**novelsy-books**](https://rent-a-pool.herokuapp.com/), your book store for any time of the day.
+Welcome to [**novelsy-books**](https://novelsybook.herokuapp.com/), your book store for any time of the day.
 
 ## Tech/Framework Used
 <b>Built with</b>
